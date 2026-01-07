@@ -21,6 +21,36 @@ fun Application.configureRouting() {
                 )
             )
         }
+
+        route("/recipes") {
+            get { 
+                // return all recipes
+            }
+            post { 
+                // add new recipe
+            }
+            get("/{id}") { 
+                // get recipe by id
+            }
+        }
+        
+        route("/ratings") {
+            post {
+                // add rating
+            }
+        }
+
+        route("/images") {
+            post {
+                // upload image
+            }
+        }
+
+        route("/collections") {
+            post {
+                // add recipe to collection
+            }
+        }
     }
 }
 
