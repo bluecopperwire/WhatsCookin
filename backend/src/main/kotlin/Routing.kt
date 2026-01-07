@@ -22,6 +22,15 @@ fun Application.configureRouting() {
             )
         }
 
+        route("/users") {
+            post { 
+                // user registration
+            }
+            get("/{id}") { 
+                // get user by id
+            }
+        }
+
         route("/recipes") {
             get { 
                 // return all recipes
