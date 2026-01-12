@@ -34,5 +34,4 @@ dependencies {
 
     implementation("org.mindrot:jbcrypt:0.4")
 
-
 }
