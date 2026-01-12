@@ -6,6 +6,7 @@ import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import com.example.model.HealthResponse
+import com.example.routes.*
 
 fun Application.configureRouting() {
     routing {
@@ -22,6 +23,8 @@ fun Application.configureRouting() {
             )
         }
 
+        //login signup routes
+        authRoutes()
         route("/users") {
             post { 
                 // user registration
