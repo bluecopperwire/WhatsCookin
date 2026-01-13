@@ -1,12 +1,12 @@
 package com.example.repository
 
-import com.example.db.RecipeTable
-import com.example.dto.RecipeResponse
+import com.example.db.RcpTable
+import com.example.dto.RcpResponse
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.UUID
 
-class RecipeRepository {
+class RcpRepository {
 
   fun addRecipe(
     recipeName: String,
@@ -17,28 +17,28 @@ class RecipeRepository {
     recipeGenre: String
   ) {
     transaction {
-    RecipeTable.insert {
-        it[RecipeTable.recipeID] = "rcp-"+ UUID.randomUUID().toString().take(6)
-        it[RecipeTable.accID] = accID
-        it[RecipeTable.recipeName] = recipeName
-        it[RecipeTable.recipeIngredients] = recipeIngredients
-        it[RecipeTable.recipeSteps] = recipeSteps
-        it[RecipeTable.recipeImg] = recipeImg
-        it[RecipeTable.recipeGenre] = recipeGenre
+    RcpTable.insert {
+        it[RcpTable.recipeID] = "rcp-"+ UUID.randomUUID().toString().take(6)
+        it[RcpTable.accID] = accID
+        it[RcpTable.recipeName] = recipeName
+        it[RcpTable.recipeIngredients] = recipeIngredients
+        it[RcpTable.recipeSteps] = recipeSteps
+        it[RcpTable.recipeImg] = recipeImg
+        it[RcpTable.recipeGenre] = recipeGenre
       }
     }
   }
 
   fun getRecipesByIngredients(
       recipeIngredients: List<String>
-  ): List<RecipeResponse> {
+  ): List<RcpResponse> {
       if (recipeIngredients.isEmpty()) return emptyList()
 
       return transaction {
-          RecipeTable
+          RcpTable
               .selectAll()
               .mapNotNull { row ->
-                  val dbIngredients = row[RecipeTable.recipeIngredients]
+                  val dbIngredients = row[RcpTable.recipeIngredients]
                       .lowercase()
                       .split(",")
                       .map { it.trim() }
@@ -48,16 +48,16 @@ class RecipeRepository {
                   }
 
                   if (matchesAll) {
-                      RecipeResponse(
-                          recipeID = row[RecipeTable.recipeID] ?: "",
-                          accID = row[RecipeTable.accID],
-                          recipeName = row[RecipeTable.recipeName],
-                          recipeIngredients = dbIngredients,
-                          recipeSteps = row[RecipeTable.recipeSteps]
+                      RcpResponse(
+                          rcpID = row[RcpTable.recipeID] ?: "",
+                          accID = row[RcpTable.accID],
+                          name = row[RcpTable.recipeName],
+                          ingredients = dbIngredients,
+                          steps = row[RcpTable.recipeSteps]
                               .split("\n")
                               .map { it.trim() },
-                          recipeImg = row[RecipeTable.recipeImg] ?: "",
-                          recipeGenere = row[RecipeTable.recipeGenre] ?: ""
+                          img = row[RcpTable.recipeImg] ?: "",
+                          genre = row[RcpTable.recipeGenre] ?: ""
                       )
                   } else {
                       null
@@ -68,25 +68,25 @@ class RecipeRepository {
 
   fun getRecipeByID(
       recipeID: String,
-  ): RecipeResponse? {
+  ): RcpResponse? {
       return transaction {
-          RecipeTable
+          RcpTable
               .select { 
-                  (RecipeTable.recipeID eq recipeID) 
+                  (RcpTable.recipeID eq recipeID) 
               }
               .mapNotNull { row ->
-                  RecipeResponse(
-                      recipeID = row[RecipeTable.recipeID] ?: "",
-                      accID = row[RecipeTable.accID],
-                      recipeName = row[RecipeTable.recipeName],
-                      recipeIngredients = row[RecipeTable.recipeIngredients]
+                  RcpResponse(
+                      rcpID = row[RcpTable.recipeID] ?: "",
+                      accID = row[RcpTable.accID],
+                      name = row[RcpTable.recipeName],
+                      ingredients = row[RcpTable.recipeIngredients]
                           .split(",")
                           .map { it.trim() },
-                      recipeSteps = row[RecipeTable.recipeSteps]
+                      steps = row[RcpTable.recipeSteps]
                           .split("\n")
                           .map { it.trim() },
-                      recipeImg = row[RecipeTable.recipeImg] ?: "",
-                      recipeGenere = row[RecipeTable.recipeGenre] ?: ""
+                      img = row[RcpTable.recipeImg] ?: "",
+                      genre = row[RcpTable.recipeGenre] ?: ""
                   )
               }
               .firstOrNull()

@@ -2,12 +2,12 @@ package com.example.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RecipeResponse(
-	val recipeID: String,
+data class RcpResponse(
+	val rcpID: String,
 	val accID: String,
-	val recipeName: String,
-  val recipeIngredients: List<String>,
-	val recipeSteps: List<String>,
-	val recipeImg: String,
-	val recipeGenere: String
+	val name: String,
+  val ingredients: List<String>,
+	val steps: List<String>,
+	val img: String,
+	val genre: String
 )

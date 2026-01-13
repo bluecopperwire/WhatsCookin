@@ -2,7 +2,7 @@ package com.example.db
 
 import org.jetbrains.exposed.sql.Table
 
-object RecipeTable : Table("rcpTable") {
+object RcpTable : Table("rcpTable") {
     val recipeID = varchar("rcpID", 20).nullable()
     val accID = varchar("accID", 20)
     val recipeName = text("rcpDetails")

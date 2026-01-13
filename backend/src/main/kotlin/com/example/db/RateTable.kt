@@ -8,6 +8,6 @@ object RateTable : Table("rateTable") {
     val accID = varchar("accID", 20)
     val rateStar = integer("rateStar").nullable()
     val rateText = text("rateText")
-    // rateTime
+
     override val primaryKey = PrimaryKey(rateID)
 }
