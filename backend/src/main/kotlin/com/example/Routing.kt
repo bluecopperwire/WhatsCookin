@@ -44,11 +44,8 @@ fun Application.configureRouting() {
             }
         }
 
-        route("/images") {
-            post {
-                // upload image
-            }
-        }
+        //images
+        imageRoutes()
 
         route("/collections") {
             post {
