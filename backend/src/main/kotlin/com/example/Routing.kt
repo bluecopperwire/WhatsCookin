@@ -35,15 +35,7 @@ fun Application.configureRouting() {
         }
 
         route("/recipes") {
-            get { 
-                // return all recipes
-            }
-            post { 
-                // add new recipe
-            }
-            get("/{id}") { 
-                // get recipe by id
-            }
+            recipeRoutes()
         }
         
         route("/ratings") {
