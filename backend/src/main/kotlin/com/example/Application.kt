@@ -11,4 +11,5 @@ fun Application.module() {
     configureRouting()
     configureDatabase()
     configureSessions()
+    ensureUploadDir()
 }
