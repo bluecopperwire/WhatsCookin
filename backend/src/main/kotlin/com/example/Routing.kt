@@ -34,6 +34,7 @@ fun Application.configureRouting() {
             }
         }
 
+        recipeRoutes()
         route("/recipes") {
             get { 
                 // return all recipes
