@@ -1,14 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-
-const onboarding = () => {
+import SearchBar from '@/components/SearchBar'
+const challenges = () => {
   return (
     <View>
-      <Text>onboarding</Text>
     </View>
   )
 }
 
-export default onboarding
+export default challenges
 
 const styles = StyleSheet.create({})

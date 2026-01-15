@@ -4,7 +4,19 @@ module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#1670AB",
+        secondary: "#2B9EC5",
+        tertiary: "#EE6D06",
+        colorfont: "#391713"
+      },
+      fontFamily:{
+        poppins: ["Poppins_400Regular"],
+        calibri: ['Calibri', 'sans-serif'],
+        league: ["LeagueSpartan_700Bold"]
+      }
+    },
   },
   plugins: [],
 }
