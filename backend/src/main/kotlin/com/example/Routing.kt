@@ -37,21 +37,17 @@ fun Application.configureRouting() {
         route("/recipes") {
             recipeRoutes()
         }
+
+        route("/filter") {
+            filterRoutes()
+        }
         
         route("/ratings") {
             post {
-                // add rating
             }
         }
 
         //images
         imageRoutes()
-
-        route("/collections") {
-            post {
-                // add recipe to collection
-            }
-        }
     }
 }
-
