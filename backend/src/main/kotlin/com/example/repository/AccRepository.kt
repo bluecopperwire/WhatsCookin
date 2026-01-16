@@ -35,4 +35,20 @@ class AccRepository {
                 .singleOrNull()
         }
     }
+
+    fun updateAccount(
+        accID: String,
+        imgID: String?,
+        accUserName: String?,
+        accPresentation: String?
+    ) {
+        transaction {
+            AccTable.update({ AccTable.accID eq accID }) { row ->
+                imgID?.let { row[AccTable.imgID] = it }
+                accUserName?.let { row[AccTable.accUserName] = it }
+                accPresentation?.let { row[AccTable.accPresentation] = it }
+            }
+        }
+    }
+
 }
