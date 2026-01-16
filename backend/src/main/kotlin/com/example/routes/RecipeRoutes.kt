@@ -92,5 +92,4 @@ fun Route.recipeRoutes() {
       call.respond(recipes)
     }
   }
-
 }
