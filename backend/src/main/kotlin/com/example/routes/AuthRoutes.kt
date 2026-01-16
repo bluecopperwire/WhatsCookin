@@ -11,6 +11,7 @@ import io.ktor.server.response.*
 import io.ktor.http.*
 import io.ktor.server.sessions.*
 import org.mindrot.jbcrypt.BCrypt
+import com.example.dto.UpdateAccountRequest
 
 fun Route.authRoutes() {
 
@@ -75,6 +76,32 @@ fun Route.authRoutes() {
             )
         )
     }
+
+    put("/account") {
+    val session = call.sessions.get<UserSession>()
+        ?: return@put call.respond(HttpStatusCode.Unauthorized)
+
+    val req = try {
+        call.receive<UpdateAccountRequest>()
+    } catch (e: Exception) {
+        e.printStackTrace()
+        return@put call.respond(
+            HttpStatusCode.BadRequest,
+            "Invalid request body"
+        )
+    }
+
+    accRepository.updateAccount(
+        accID = session.accID,
+        imgID = req.imgID,
+        accUserName = req.accUserName,
+        accPresentation = req.accPresentation
+    )
+
+    call.respond(HttpStatusCode.OK, "Account updated successfully")
+}
+
+
 
     post("/logout") {
         call.sessions.clear<UserSession>()
