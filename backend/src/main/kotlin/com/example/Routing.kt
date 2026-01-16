@@ -47,20 +47,12 @@ fun Application.configureRouting() {
         route("/filter") {
             filterRoutes()
         }
-        
-        route("/ratings") {
-            post {
-            }
-        }
+
+        ratingRoutes()
 
         //images
         imageRoutes()
 
-        route("/collections") {
-            post {
-                // add recipe to collection
-            }
-        }
 
         //detection
         detectionRoutes(yoloService)
