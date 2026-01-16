@@ -30,7 +30,8 @@ class FilterRepository {
               .map {it.trim()},
             img = row[RcpTable.recipeImg] ?: "",
             genre = row[RcpTable.recipeGenre] ?: "",
-            description = row[RcpTable.recipeDesc]
+            description = row[RcpTable.recipeDesc],
+            amount = row[RcpTable.recipeAmount].split(",").map {it.trim()}
             )
           } else {
             null

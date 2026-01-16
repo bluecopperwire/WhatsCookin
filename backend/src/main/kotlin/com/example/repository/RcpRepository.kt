@@ -16,7 +16,8 @@ class RcpRepository {
     recipeSteps: String,
     recipeImg: String,
     recipeGenre: String,
-    recipeDesc: String
+    recipeDesc: String,
+    recipeAmount: String
   ) {
     transaction {
     RcpTable.insert {
@@ -28,6 +29,7 @@ class RcpRepository {
         it[RcpTable.recipeImg] = recipeImg
         it[RcpTable.recipeGenre] = recipeGenre
         it[RcpTable.recipeDesc] = recipeDesc
+        it[RcpTable.recipeAmount] = recipeAmount
       }
     }
   }
@@ -40,7 +42,8 @@ class RcpRepository {
     recipeSteps: String,
     recipeImg: String,
     recipeGenre: String,
-    recipeDesc: String
+    recipeDesc: String,
+    recipeAmount: String
   ) {
     transaction {
         RcpTable.update({RcpTable.recipeID eq recipeID}) {
@@ -50,7 +53,8 @@ class RcpRepository {
             it[RcpTable.recipeSteps] = recipeSteps
             it[RcpTable.recipeImg] = recipeImg
             it[RcpTable.recipeGenre] = recipeGenre
-            it[RcpTable.recipeDesc] = recipeDesc  
+            it[RcpTable.recipeDesc] = recipeDesc
+            it[RcpTable.recipeAmount] = recipeAmount
         }
     }
   }
@@ -63,36 +67,37 @@ class RcpRepository {
     }
   }
 
-  fun getRecipesByIngredients(
+    fun getRecipesByIngredients(
       recipeIngredients: List<String>
-  ): List<RcpResponse> {
-      if (recipeIngredients.isEmpty()) return emptyList()
+    ): List<RcpResponse> {
+    if (recipeIngredients.isEmpty()) return emptyList()
 
-      return transaction {
-          RcpTable
-              .selectAll()
-              .mapNotNull { row ->
-                  val dbIngredients = row[RcpTable.recipeIngredients]
-                      .lowercase()
-                      .split(",")
-                      .map { it.trim() }
+    return transaction {
+        RcpTable
+        .selectAll()
+        .mapNotNull { row ->
+            val dbIngredients = row[RcpTable.recipeIngredients]
+                .lowercase()
+                .split(",")
+                .map { it.trim() }
 
-                  val matchesAll = recipeIngredients.all { ingredient ->
-                      dbIngredients.contains(ingredient.lowercase().trim())
-                  }
+                val matchesAll = recipeIngredients.all { ingredient ->
+                dbIngredients.contains(ingredient.lowercase().trim())
+                }
 
-                  if (matchesAll) {
-                      RcpResponse(
-                          rcpID = row[RcpTable.recipeID] ?: "",
-                          accID = row[RcpTable.accID],
-                          name = row[RcpTable.recipeName],
-                          ingredients = dbIngredients,
-                          steps = row[RcpTable.recipeSteps]
-                              .split("\n")
-                              .map { it.trim() },
-                          img = row[RcpTable.recipeImg] ?: "",
-                          genre = row[RcpTable.recipeGenre] ?: "",
-                          description = row[RcpTable.recipeDesc]
+                if (matchesAll) {
+                    RcpResponse(
+                        rcpID = row[RcpTable.recipeID] ?: "",
+                        accID = row[RcpTable.accID],
+                        name = row[RcpTable.recipeName],
+                        ingredients = dbIngredients,
+                        steps = row[RcpTable.recipeSteps]
+                            .split("\n")
+                            .map { it.trim() },
+                        img = row[RcpTable.recipeImg] ?: "",
+                        genre = row[RcpTable.recipeGenre] ?: "",
+                        description = row[RcpTable.recipeDesc],
+                        amount = row[RcpTable.recipeAmount]
                       )
                   } else {
                       null
@@ -104,30 +109,29 @@ class RcpRepository {
   fun getRecipeByID(
       recipeID: String,
   ): RcpResponse? {
-      return transaction {
-          RcpTable
-              .select { 
-                  (RcpTable.recipeID eq recipeID) 
-              }
-              .mapNotNull { row ->
-                  RcpResponse(
-                      rcpID = row[RcpTable.recipeID] ?: "",
-                      accID = row[RcpTable.accID],
-                      name = row[RcpTable.recipeName],
-                      ingredients = row[RcpTable.recipeIngredients]
-                          .split(",")
-                          .map { it.trim() },
-                      steps = row[RcpTable.recipeSteps]
-                          .split("\n")
-                          .map { it.trim() },
-                      img = row[RcpTable.recipeImg] ?: "",
-                      genre = row[RcpTable.recipeGenre] ?: "",
-                      description = row[RcpTable.recipeDesc]
-                  )
-              }
-              .firstOrNull()
-      }
+    return transaction {
+        RcpTable
+            .select { 
+                (RcpTable.recipeID eq recipeID) 
+            }
+            .mapNotNull { row ->
+            RcpResponse(
+                rcpID = row[RcpTable.recipeID] ?: "",
+                accID = row[RcpTable.accID],
+                name = row[RcpTable.recipeName],
+                ingredients = row[RcpTable.recipeIngredients]
+                    .split(",")
+                    .map { it.trim() },
+                steps = row[RcpTable.recipeSteps]
+                    .split("\n")
+                    .map { it.trim() },
+                img = row[RcpTable.recipeImg] ?: "",
+                genre = row[RcpTable.recipeGenre] ?: "",
+                description = row[RcpTable.recipeDesc],
+                amount = row[RcpTable.recipeAmount]
+                )
+            }   
+        .firstOrNull()
+    }
   }
-
-
 }
