@@ -10,6 +10,7 @@ object RcpTable : Table("rcpTable") {
     val recipeSteps = text("rcpSteps")
     val recipeImg = varchar("imgID", 20).nullable()
     val recipeGenre = varchar("rcpGenre", 100).nullable()
-
+    val recipeDesc = text("rcpDesc")
+    
     override val primaryKey = PrimaryKey(recipeID)
 }

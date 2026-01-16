@@ -1,7 +1,9 @@
 package com.example.routes
 
-import com.example.dto.RcpRequest
+import com.example.dto.AddRcpRequest
 import com.example.repository.RcpRepository
+import com.example.dto.EditRcpRequest
+import com.example.dto.DeleteRcpRequest
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -12,10 +14,9 @@ import io.ktor.server.sessions.*
 fun Route.recipeRoutes() {
   val recRepository = RcpRepository()
 
-  post {
-    val req = call.receive<RcpRequest>()
+  post("/add") {
+    val req = call.receive<AddRcpRequest>()
 
-    print("HERE")
     recRepository.addRecipe(
       req.name, 
       req.accID, 
@@ -23,9 +24,38 @@ fun Route.recipeRoutes() {
       req.steps.joinToString("."), 
       req.img, 
       req.genre,
+      req.description
     )
 
-    call.respond(HttpStatusCode.Created, "Recipe added successfully")
+    call.respond(HttpStatusCode.Created, "Recipe added successfully!")
+  }
+
+  put("/edit") {
+    val req = call.receive<EditRcpRequest>()
+
+    recRepository.editRecipe(
+      req.name, 
+      req.rcpID,
+      req.accID, 
+      req.ingredients.joinToString(","), 
+      req.steps.joinToString("."), 
+      req.img, 
+      req.genre,
+      req.description
+    )
+
+    call.respond(HttpStatusCode.Accepted, "Recipe edited successfully!")
+  }
+
+  delete("/delete/{id}") {
+    val rcpID = call.parameters["id"]
+
+    if (rcpID == null) {
+      call.respond(HttpStatusCode.BadRequest, "Missing recipeID!")
+        return@delete
+    }
+    recRepository.deleteRecipe(rcpID)
+    call.respond(HttpStatusCode.Accepted, "Recipe deleted successfully!")
   }
 
   // url looks like  GET /recipes/{id}
@@ -36,8 +66,6 @@ fun Route.recipeRoutes() {
         call.respond(HttpStatusCode.BadRequest, "Missing recipeID")
         return@get
     }
-
-    // print(recipeID)
 
     val recipe = recRepository.getRecipeByID(recipeID)
     if (recipe == null) {

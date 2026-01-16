@@ -29,7 +29,8 @@ class FilterRepository {
               .split("\n")
               .map {it.trim()},
             img = row[RcpTable.recipeImg] ?: "",
-            genre = row[RcpTable.recipeGenre] ?: ""
+            genre = row[RcpTable.recipeGenre] ?: "",
+            description = row[RcpTable.recipeDesc]
             )
           } else {
             null
