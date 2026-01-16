@@ -24,7 +24,8 @@ fun Route.recipeRoutes() {
       req.steps.joinToString("."), 
       req.img, 
       req.genre,
-      req.description
+      req.description,
+      req.amount.joinToString(",")
     )
 
     call.respond(HttpStatusCode.Created, "Recipe added successfully!")
@@ -41,7 +42,8 @@ fun Route.recipeRoutes() {
       req.steps.joinToString("."), 
       req.img, 
       req.genre,
-      req.description
+      req.description,
+      req.amount.joinToString(",")
     )
 
     call.respond(HttpStatusCode.Accepted, "Recipe edited successfully!")
@@ -63,13 +65,13 @@ fun Route.recipeRoutes() {
     val recipeID = call.parameters["id"]
 
     if (recipeID == null) {
-        call.respond(HttpStatusCode.BadRequest, "Missing recipeID")
+        call.respond(HttpStatusCode.BadRequest, "Missing recipeID!")
         return@get
     }
 
     val recipe = recRepository.getRecipeByID(recipeID)
     if (recipe == null) {
-        call.respond(HttpStatusCode.NotFound, "Recipe not found")
+        call.respond(HttpStatusCode.NotFound, "Recipe not found.")
     } else {
         call.respond(recipe)
     }
@@ -79,11 +81,9 @@ fun Route.recipeRoutes() {
   get {
     val ingrs = call.request.queryParameters["ingredients"].toString().split(",")
     if (ingrs.isEmpty()) {
-      call.respond(HttpStatusCode.BadRequest, "Missing ingredients")
+      call.respond(HttpStatusCode.BadRequest, "Missing ingredients!")
       return@get
     }
-
-    print(ingrs)
 
     val recipes = recRepository.getRecipesByIngredients(ingrs)
     if (recipes.isEmpty()) {
@@ -92,5 +92,4 @@ fun Route.recipeRoutes() {
       call.respond(recipes)
     }
   }
-
 }

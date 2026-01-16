@@ -9,5 +9,6 @@ data class AddRcpRequest(
 	val steps: List<String>,
 	val img: String,
 	val genre: String,
-	val description: String
+	val description: String,
+	val amount: List<String>
 )
