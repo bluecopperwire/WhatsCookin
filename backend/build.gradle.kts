@@ -6,6 +6,7 @@ plugins {
 
 group = "com.example"
 version = "0.0.1"
+val ktor_version = "2.3.4" 
 
 application {
     mainClass = "io.ktor.server.netty.EngineMain"
@@ -32,5 +33,10 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation")
     implementation("io.ktor:ktor-serialization-kotlinx-json")
     implementation("org.mindrot:jbcrypt:0.4")
+
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-client-cio:$ktor_version")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
 
 }
