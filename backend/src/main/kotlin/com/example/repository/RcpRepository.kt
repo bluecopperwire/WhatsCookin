@@ -98,6 +98,8 @@ class RcpRepository {
                         genre = row[RcpTable.recipeGenre] ?: "",
                         description = row[RcpTable.recipeDesc],
                         amount = row[RcpTable.recipeAmount]
+                            .split(",")
+                            .map { it.trim() }
                       )
                   } else {
                       null
@@ -128,7 +130,8 @@ class RcpRepository {
                 img = row[RcpTable.recipeImg] ?: "",
                 genre = row[RcpTable.recipeGenre] ?: "",
                 description = row[RcpTable.recipeDesc],
-                amount = row[RcpTable.recipeAmount]
+                amount = row[RcpTable.recipeAmount].split(",")
+                    .map { it.trim() }
                 )
             }   
         .firstOrNull()
