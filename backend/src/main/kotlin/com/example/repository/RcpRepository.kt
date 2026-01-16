@@ -5,6 +5,7 @@ import com.example.dto.RcpResponse
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.UUID
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 class RcpRepository {
 
@@ -14,7 +15,8 @@ class RcpRepository {
     recipeIngredients: String,
     recipeSteps: String,
     recipeImg: String,
-    recipeGenre: String
+    recipeGenre: String,
+    recipeDesc: String
   ) {
     transaction {
     RcpTable.insert {
@@ -25,7 +27,39 @@ class RcpRepository {
         it[RcpTable.recipeSteps] = recipeSteps
         it[RcpTable.recipeImg] = recipeImg
         it[RcpTable.recipeGenre] = recipeGenre
+        it[RcpTable.recipeDesc] = recipeDesc
       }
+    }
+  }
+
+  fun editRecipe(
+    recipeName: String,
+    recipeID: String,
+    accID: String,
+    recipeIngredients: String,
+    recipeSteps: String,
+    recipeImg: String,
+    recipeGenre: String,
+    recipeDesc: String
+  ) {
+    transaction {
+        RcpTable.update({RcpTable.recipeID eq recipeID}) {
+            it[RcpTable.accID] = accID
+            it[RcpTable.recipeName] = recipeName
+            it[RcpTable.recipeIngredients] = recipeIngredients
+            it[RcpTable.recipeSteps] = recipeSteps
+            it[RcpTable.recipeImg] = recipeImg
+            it[RcpTable.recipeGenre] = recipeGenre
+            it[RcpTable.recipeDesc] = recipeDesc  
+        }
+    }
+  }
+
+    fun deleteRecipe(
+    recipeID: String,
+    ) {
+    transaction {
+        RcpTable.deleteWhere {RcpTable.recipeID eq recipeID} > 0
     }
   }
 
@@ -57,7 +91,8 @@ class RcpRepository {
                               .split("\n")
                               .map { it.trim() },
                           img = row[RcpTable.recipeImg] ?: "",
-                          genre = row[RcpTable.recipeGenre] ?: ""
+                          genre = row[RcpTable.recipeGenre] ?: "",
+                          description = row[RcpTable.recipeDesc]
                       )
                   } else {
                       null
@@ -86,7 +121,8 @@ class RcpRepository {
                           .split("\n")
                           .map { it.trim() },
                       img = row[RcpTable.recipeImg] ?: "",
-                      genre = row[RcpTable.recipeGenre] ?: ""
+                      genre = row[RcpTable.recipeGenre] ?: "",
+                      description = row[RcpTable.recipeDesc]
                   )
               }
               .firstOrNull()

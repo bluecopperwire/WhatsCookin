@@ -2,9 +2,9 @@ package com.example.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RcpResponse(
-	val rcpID: String,
+data class EditRcpRequest(
 	val accID: String,
+    val rcpID: String,
 	val name: String,
   	val ingredients: List<String>,
 	val steps: List<String>,
