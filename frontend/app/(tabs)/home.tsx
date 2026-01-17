@@ -92,7 +92,7 @@ export default function home() {
             resizeMode="contain"
             />
           </Pressable>
-          <Pressable className="w-[73px] h-[108px] mr-3 rounded-3xl">
+          <Pressable onPress={() => router.push("/review")} className="w-[73px] h-[108px] mr-3 rounded-3xl">
             <Image
             source={icons.Food4}
             className="absolute inset-0 w-full h-full"

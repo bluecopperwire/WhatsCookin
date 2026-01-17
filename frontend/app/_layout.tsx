@@ -27,6 +27,10 @@ export default function RootLayout() {
         name="edit"
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="bestrecipeScan"
+        options={{ headerShown: false }}
+      />
       
     </Stack>
   )

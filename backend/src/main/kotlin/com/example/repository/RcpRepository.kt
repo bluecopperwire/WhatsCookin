@@ -92,7 +92,7 @@ class RcpRepository {
                         name = row[RcpTable.recipeName],
                         ingredients = dbIngredients,
                         steps = row[RcpTable.recipeSteps]
-                            .split("\n")
+                            .split("||")
                             .map { it.trim() },
                         img = row[RcpTable.recipeImg] ?: "",
                         genre = row[RcpTable.recipeGenre] ?: "",
@@ -125,7 +125,7 @@ class RcpRepository {
                     .split(",")
                     .map { it.trim() },
                 steps = row[RcpTable.recipeSteps]
-                    .split("\n")
+                    .split("||")
                     .map { it.trim() },
                 img = row[RcpTable.recipeImg] ?: "",
                 genre = row[RcpTable.recipeGenre] ?: "",
