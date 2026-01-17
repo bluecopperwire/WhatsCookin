@@ -86,21 +86,21 @@ const _layout = () => {
           }}
         />
         <Tabs.Screen
-          name="recipe"
+          name="recipe/[id]"
           options={{
             headerShown: false,
             tabBarItemStyle: { display: "none" },
           }}
         />
         <Tabs.Screen
-          name="review"
+          name="review/[id]"
           options={{
             headerShown: false,
             tabBarItemStyle: { display: "none" },
           }}
         />
         <Tabs.Screen
-          name="leaveReview"
+          name="leaveReview/[id]"
           options={{
             headerShown: false,
             tabBarItemStyle: { display: "none" },
