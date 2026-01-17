@@ -39,7 +39,11 @@ export async function signupRequest(body: SignupRequestBody): Promise<string> {
 
   const text = await res.text();
   if (!res.ok) throw new Error(text || "Signup failed");
+<<<<<<< HEAD
   return text; // "Signup successful"
+=======
+  return text;
+>>>>>>> origin/frontend3
 }
 
 export async function detectIngredients(imageUri: string) {

@@ -85,7 +85,10 @@ const Register = () => {
           Create your account!
         </Text>
 
+<<<<<<< HEAD
         {/* Username */}
+=======
+>>>>>>> origin/frontend3
         <View
           style={{
             flexDirection: "row",

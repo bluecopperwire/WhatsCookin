@@ -15,7 +15,7 @@ const vegan = () => {
       <View  className="w-[260px] h-[49px] bg-white rounded-[30px] ml-5 pt-[4px] pl-5">
         <SearchBar/>
       </View>
-        <TouchableOpacity className="bg-white rounded-lg w-[40px] h-[40px] items-center justify-center ml-[10px] mt-1">
+        <TouchableOpacity onPress={() => router.push("/filter")} className="bg-white rounded-lg w-[40px] h-[40px] items-center justify-center ml-[10px] mt-1">
           <Image source={icons.Filter} style={{ width: 20, height: 20 }} resizeMode="contain" />
         </TouchableOpacity>
         <TouchableOpacity className="bg-white rounded-lg w-[40px] h-[40px] items-center justify-center ml-[10px] mt-1">

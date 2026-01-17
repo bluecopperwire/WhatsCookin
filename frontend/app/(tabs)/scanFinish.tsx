@@ -89,8 +89,17 @@ const scanFinish = () => {
             marginTop: 20,
             width: "100%",
             alignItems: "center",
+<<<<<<< HEAD
           }}
           onPress={() => router.push("/bestrecipe")} // change if your next page is different
+=======
+          }}
+          onPress={() => {
+            // Convert ingredients to a URL-encoded string and pass as a query parameter
+            const ingredientsParam = encodeURIComponent(JSON.stringify(ingredients));
+            router.push(`/bestrecipeScan?ingredients=${ingredientsParam}`);
+          }}
+>>>>>>> origin/frontend3
         >
           <Image source={icons.Finish} style={{ width: 320, height: 60 }} resizeMode="contain" />
         </TouchableOpacity>
