@@ -85,14 +85,14 @@ export default function home() {
         </View>
 
         <View className="flex-row w-[323px] h-28 ml-4 mt-7" >
-          <Pressable onPress={() => router.push("/login")} className="w-[73px] h-[108px] mr-3 rounded-3xl">
+          <Pressable className="w-[73px] h-[108px] mr-3 rounded-3xl">
             <Image
             source={icons.Food1}
             className="absolute inset-0 w-full h-full"
             resizeMode="contain"
             />
           </Pressable>
-          <Pressable onPress={() => router.push("/review")} className="w-[73px] h-[108px] mr-3 rounded-3xl">
+          <Pressable className="w-[73px] h-[108px] mr-3 rounded-3xl">
             <Image
             source={icons.Food4}
             className="absolute inset-0 w-full h-full"

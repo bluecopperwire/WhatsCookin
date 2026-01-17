@@ -85,7 +85,6 @@ const Register = () => {
           Create your account!
         </Text>
 
-        {/* Username */}
         <View
           style={{
             flexDirection: "row",

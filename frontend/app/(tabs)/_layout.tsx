@@ -45,15 +45,6 @@ const _layout = () => {
           }}
         />
         <Tabs.Screen
-          name="challenges"
-          options={{
-            headerShown: false,
-            tabBarIcon: ({focused}) => (
-              <TabIcon focused={focused} icon={icons.Challenges}/>
-            )
-          }}
-        />
-        <Tabs.Screen
           name="scan"
           options={{
             headerShown: false,
@@ -101,13 +92,6 @@ const _layout = () => {
         />
         <Tabs.Screen
           name="leaveReview/[id]"
-          options={{
-            headerShown: false,
-            tabBarItemStyle: { display: "none" },
-          }}
-        />
-        <Tabs.Screen
-          name="favorite"
           options={{
             headerShown: false,
             tabBarItemStyle: { display: "none" },
