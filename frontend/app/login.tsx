@@ -8,6 +8,8 @@ import { Image } from "react-native";
 import { Pressable } from "react-native";
 import { useRouter } from "expo-router";
 
+
+
 const login = () => {
   const router = useRouter();
   return (
@@ -30,13 +32,15 @@ const login = () => {
         resizeMode="contain"
       />
     </View>
+
     <TouchableOpacity
      style={{
       height: 60,
       width: "100%",
+      marginTop: 30,
       alignItems: "center",
       }}
-      onPress={() => router.push("/recipe")}  
+      onPress={() => router.push("/loginpage")}  
     >
       <Image
         source={icons.Login}
@@ -44,6 +48,7 @@ const login = () => {
         resizeMode="contain"
       />
     </TouchableOpacity>
+
     <TouchableOpacity
      style={{
       height: 60,
